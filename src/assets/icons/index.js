@@ -1,8 +1,6 @@
-import Vue from "vue";
-import SvgIcon from "@/components/SvgIcon";
+// 尝试使用react引入 svg 图片  尝试失败  我是菜鸡555
 
-Vue.component("svg-icon", SvgIcon);
-const requireAll = (requireContext) =>
-  requireContext.keys().map(requireContext);
-const req = require.context("./", true, /\.svg$/);
-requireAll(req);
+// import Icon from '@ant-design/icons';
+// import { ReactComponent as github } from './github.svg';
+
+// export const SvgIcon = () => <Icon component={github} className="icon" />;
