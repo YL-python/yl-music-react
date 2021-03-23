@@ -240,7 +240,7 @@ img {
 
 /* 全局自定义样式 */
 /* 全局的框架样式 */
-/* @import '~antd/dist/antd.css'; */
+@import '~antd/dist/antd.css';
 /* 全局样式 */
 @import url('https://at.alicdn.com/t/font_2395096_k24k9kgo0wk.css');
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,500;0,600;0,700;0,800;0,900;1,500;1,600;1,700;1,800;1,900&display=swap');
@@ -259,6 +259,12 @@ button {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+.text-nowrap2 {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 .wrap-v1 {
   width: 1100px;
@@ -295,4 +301,5 @@ body {
 main {
   width: 980px;
   margin: 84px auto 96px;
+  box-sizing: content-box;
 }

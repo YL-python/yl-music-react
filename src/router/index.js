@@ -11,4 +11,5 @@ const routes = [
   { path: '/my', component: YLMy },
   { path: '*', render: () => <Redirect to="/" /> },
 ];
+
 export default routes;
