@@ -1,10 +1,18 @@
 import React, { memo } from 'react';
+// import LazyLoad from 'react-lazyload';
 
 import { AlbumCoverWrapper } from './style';
+import { getPlayCount, getSizeImage } from '@/utils/format-utils';
 
-export default memo(function AlbumCover() {
+export default memo(function AlbumCover(props) {
+  let picUrl = props.album?.picUrl;
+  picUrl = getSizeImage(picUrl, 1902);
+  let playCount = props.album?.playCount;
+  playCount = getPlayCount(playCount);
+  const copywriter = props.album?.copywriter;
+  const name = props.album?.name;
   return (
-    <AlbumCoverWrapper>
+    <AlbumCoverWrapper picUrl={picUrl}>
       <div className="cover cover-hover">
         <div className="cover-container">
           <div className="shade">
@@ -12,27 +20,28 @@ export default memo(function AlbumCover() {
               <i className="iconfont icon-1_music81"></i>
             </button>
           </div>
-          <img
-            alt=""
-            src="https://p2.music.126.net/bQSgDY2r5xSnC_IEdf2jBQ==/109951165797255055.jpg?param=512y512"
-          ></img>
+          <img alt="错误" src={picUrl}></img>
+
           <div className="shadow fade"></div>
         </div>
       </div>
       <div className="cover-desc">
-        <div className="cover-info">
-          <span className="play-count">
-            <i className="play iconfont icon-1_music81" />
-            123
-          </span>
+        {playCount ? (
+          <div className="cover-info">
+            <span className="play-count">
+              <i className="play iconfont icon-1_music81" />
+              {playCount}
+            </span>
+          </div>
+        ) : (
+          ''
+        )}
+
+        <div className="cover-title text-nowrap2" title={name}>
+          <a href="#/">{name}</a>
         </div>
-        <div className="cover-title text-nowrap2">
-          <a href="#/">
-            运动 有氧 健身BGM｜一半自律 一半热爱生活一半热爱生活一半热爱生活
-          </a>
-        </div>
-        <div className="cover-info text-nowrap2">
-          <span>编辑推荐：夏日将至，你的马甲线准备好了吗？一半热爱生活一半热爱生活</span>
+        <div className="cover-info text-nowrap2" title={copywriter}>
+          <span>{copywriter}</span>
         </div>
       </div>
     </AlbumCoverWrapper>

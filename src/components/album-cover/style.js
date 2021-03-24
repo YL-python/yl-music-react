@@ -3,15 +3,19 @@ import styled from 'styled-components';
 export const AlbumCoverWrapper = styled.div`
   width: 170px;
   position: relative;
+
   .cover-hover {
+    cursor: pointer;
     transition: transform 0.3s;
     &:hover {
-      cursor: pointer;
       transform: scale(1.02);
 
       .fade {
         opacity: 1;
         transition: 0.3s;
+      }
+      .shade .play-button {
+        display: block;
       }
     }
   }
@@ -24,8 +28,9 @@ export const AlbumCoverWrapper = styled.div`
       transform: translate(-50%, -50%);
       background: transparent;
       .play-button {
-        width: 45px;
-        height: 45px;
+        display: none;
+        width: 40px;
+        height: 40px;
         color: #fff;
         background: transparent;
         backdrop-filter: blur(12px) brightness(96%);
@@ -53,11 +58,11 @@ export const AlbumCoverWrapper = styled.div`
       height: 100%;
       width: 100%;
       position: absolute;
-      top: 12px;
+      top: 14px;
       filter: blur(16px) opacity(0.6);
       transform: scale(0.92, 0.96);
       z-index: -1;
-      background-image: url('https://p2.music.126.net/bQSgDY2r5xSnC_IEdf2jBQ==/109951165797255055.jpg?param=512y512');
+      background-image: ${(props) => `url(${props.picUrl})`};
       background-size: cover;
       border-radius: 8%;
     }
