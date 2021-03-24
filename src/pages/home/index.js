@@ -6,15 +6,14 @@ import { getRecommendListAction } from '@/store/home/actionCreators';
 import { HomeWrapper } from './style';
 import AlbumCover from '@/components/album-cover';
 
-export default memo(function Home() {
+export default memo(function Home(props) {
   const { recommendList } = useSelector(
     (state) => ({ recommendList: state.getIn(['home', 'recommendList']) }),
     shallowEqual
   );
-  console.log('recommendList', recommendList);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getRecommendListAction(30));
+    dispatch(getRecommendListAction(10));
   }, [dispatch]);
 
   return (
@@ -25,7 +24,7 @@ export default memo(function Home() {
       </div>
       <div className="cover-list">
         {recommendList.map((item, index) => {
-          return <AlbumCover key={item.id} album={item} />;
+          return <AlbumCover key={item.id} album={item} size={256} {...props} />;
         })}
       </div>
     </HomeWrapper>

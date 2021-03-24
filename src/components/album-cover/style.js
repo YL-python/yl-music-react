@@ -15,7 +15,7 @@ export const AlbumCoverWrapper = styled.div`
         transition: 0.3s;
       }
       .shade .play-button {
-        display: block;
+        display: block !important;
       }
     }
   }
@@ -25,6 +25,7 @@ export const AlbumCoverWrapper = styled.div`
       position: absolute;
       top: 50%;
       left: 50%;
+      z-index: 10;
       transform: translate(-50%, -50%);
       background: transparent;
       .play-button {

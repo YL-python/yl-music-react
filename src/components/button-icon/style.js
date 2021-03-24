@@ -4,9 +4,7 @@ export const ButtonWrapper = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px;
   background: transparent;
-  margin: 4px;
   border-radius: 25%;
   transition: 0.2s;
   cursor: pointer;
@@ -14,6 +12,7 @@ export const ButtonWrapper = styled.button`
     color: var(--color-text);
     height: 24px;
     width: 24px;
+    margin: 8px;
     font-size: 24px;
     font-weight: 600;
   }

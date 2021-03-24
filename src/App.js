@@ -2,20 +2,23 @@ import React, { memo, Suspense } from 'react';
 import { Provider } from 'react-redux';
 import { renderRoutes } from 'react-router-config';
 import { HashRouter } from 'react-router-dom';
+import { Empty } from 'antd';
 
 import routes from './router';
 import store from './store';
 
 import YLheader from './components/yl-header';
 
-export default memo(function App() {
+export default memo(function App(props) {
   return (
     <>
       <Provider store={store}>
         <HashRouter>
-          <YLheader />
+          <YLheader {...props} />
           <main>
-            <Suspense fallback={<div>page loading</div>}>{renderRoutes(routes)}</Suspense>
+            <Suspense fallback={<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}>
+              {renderRoutes(routes)}
+            </Suspense>
           </main>
         </HashRouter>
       </Provider>
