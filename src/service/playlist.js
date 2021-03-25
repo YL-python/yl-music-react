@@ -1,4 +1,5 @@
 import request from './request';
+import { mapTrackPlayableStatus } from '@/utils/common';
 
 /**
  * 推荐歌单
@@ -26,10 +27,10 @@ export function getPlaylistDetail(id) {
     method: 'get',
     params,
   }).then((data) => {
-    // data.playlist.tracks = mapTrackPlayableStatus(
-    //   data.playlist.tracks,
-    //   data.privileges || []
-    // );
+    data.playlist.tracks = mapTrackPlayableStatus(
+      data.playlist.tracks,
+      data.privileges || []
+    );
     return data;
   });
 }

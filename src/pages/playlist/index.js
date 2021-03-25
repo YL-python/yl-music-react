@@ -1,24 +1,30 @@
 import React, { memo, useEffect, useState } from 'react';
 
 import CoverImg from '@/components/cover-img';
+import PlayListItem from '@/components/playlist-item/';
 import { PlayListWrapper } from './style';
 import { getPlaylistDetail } from '@/service/playlist';
+import { getSongDetail } from '@/service/song';
 import ButtonTone from '@/components/button-tone';
 
 export default memo(function Playlist(props) {
-  const [isLike, setIsLike] = useState(false);
+  const [isPlaylistLike, setIsPlaylistLike] = useState(false);
+  const [playlistDetail, setPlaylistDetail] = useState([]);
+  const [songList, setSongList] = useState([]);
 
   const id = props.match.params.id;
-  const [playlistDetail, setPlaylistDetail] = useState([]);
   useEffect(() => {
     getPlaylistDetail(id).then((res) => {
       setPlaylistDetail(res.playlist);
+      let ids = res.playlist.trackIds.map((item) => item.id);
+      getSongDetail(ids.join(',')).then((res) => {
+        setSongList(res.songs);
+      });
     });
   }, [id]);
 
   const changeLike = function () {
-    console.log('changeLike');
-    setIsLike(!isLike);
+    setIsPlaylistLike(!isPlaylistLike);
   };
 
   const picUrl = playlistDetail.coverImgUrl;
@@ -43,14 +49,22 @@ export default memo(function Playlist(props) {
             </ButtonTone>
             <ButtonTone
               onClick={(e) => changeLike()}
-              backgroundColor={isLike ? 'var(--color-secondary-bg)' : ''}
+              backgroundColor={!isPlaylistLike ? 'var(--color-secondary-bg)' : ''}
             >
-              <i className={!isLike ? 'iconfont icon-love-b' : 'iconfont icon-love-b1'} />
+              <i
+                className={
+                  isPlaylistLike ? 'iconfont icon-love-b' : 'iconfont icon-love-b1'
+                }
+              />
             </ButtonTone>
           </div>
         </div>
       </div>
-      <div className="playlist-list">歌曲列表</div>
+      <div className="playlist-list">
+        {songList.map((song) => {
+          return <PlayListItem song={song} key={song.id} />;
+        })}
+      </div>
     </PlayListWrapper>
   );
 });

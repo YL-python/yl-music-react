@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const CoverImgWrapper = styled.div`
   width: 290px;
+  height: 290px;
   position: relative;
 
   img {

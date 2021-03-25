@@ -301,6 +301,7 @@ body {
 }
 main {
   width: 980px;
-  margin: 84px auto 96px;
+  margin: 84px auto 0;
+  padding-bottom: 96px;
   box-sizing: content-box;
 }
