@@ -13,11 +13,11 @@ export default memo(function YLHeader(props) {
     <HeaderWrapper>
       <div className="header-content wrap-v2">
         <div className="buttons">
-          <ButtonIcon>
-            <i onClick={(e) => history.go(-1)} className="iconfont icon-icon-test"></i>
+          <ButtonIcon onClick={(e) => history.go(-1)}>
+            <i className="iconfont icon-icon-test"></i>
           </ButtonIcon>
-          <ButtonIcon>
-            <i onClick={(e) => history.go(1)} className="iconfont icon-icon-test1"></i>
+          <ButtonIcon onClick={(e) => history.go(1)}>
+            <i className="iconfont icon-icon-test1"></i>
           </ButtonIcon>
         </div>
         <div className="links">

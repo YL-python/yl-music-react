@@ -8,6 +8,7 @@ import routes from './router';
 import store from './store';
 
 import YLheader from './components/yl-header';
+import YLPlayer from './pages/player';
 
 export default memo(function App(props) {
   return (
@@ -20,6 +21,7 @@ export default memo(function App(props) {
               {renderRoutes(routes)}
             </Suspense>
           </main>
+          <YLPlayer />
         </HashRouter>
       </Provider>
     </>

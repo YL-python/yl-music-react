@@ -7,12 +7,12 @@ export const ButtonWrapper = styled.button`
   background: transparent;
   border-radius: 25%;
   transition: 0.2s;
+  padding: 8px;
   cursor: pointer;
   i {
     color: var(--color-text);
     height: 24px;
     width: 24px;
-    margin: 8px;
     font-size: 24px;
     font-weight: 600;
   }

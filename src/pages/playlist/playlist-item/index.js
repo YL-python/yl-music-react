@@ -1,4 +1,8 @@
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { setCurrentSongAction } from '@/store/player/actionCreators';
+import useLikeSong from '@/hooks/likeSongHook';
 
 import { getSongArtists, getSizeImage, formatMinuteSecond } from '@/utils/format-utils';
 import { ItemWrapper } from './style';
@@ -6,13 +10,16 @@ import ButtonTone from '@/components/button-tone';
 
 export default memo(function PlayListItem(props) {
   const song = props.song;
-  const [isSonglistLike, setIsSonglistLike] = useState(false);
-  const likeThisSong = function () {
-    setIsSonglistLike(!isSonglistLike);
-  };
+  const [isLikeSong, toggleIsLikeSong] = useLikeSong();
+
+  const dispatch = useDispatch();
+  function playSong(song) {
+    dispatch(setCurrentSongAction(song));
+  }
+
   return (
-    <ItemWrapper disable={song.playable}>
-      <img src={getSizeImage(song.al?.picUrl, 126)} alt="" />
+    <ItemWrapper disable={song.playable} onClick={(e) => playSong(song)}>
+      <img src={getSizeImage(song.al?.picUrl, 128)} alt="" />
       <div className="title-and-artist">
         <div className="playlist-item-title">{song.name}</div>
         <div className="playlist-item-artist">
@@ -21,10 +28,8 @@ export default memo(function PlayListItem(props) {
       </div>
       <div className="playlist-item-album">{song.al?.name}</div>
       <div className="playlist-item-actions">
-        <ButtonTone onClick={(e) => likeThisSong()} backgroundColor={'#fff'}>
-          <i
-            className={isSonglistLike ? 'iconfont icon-love-b' : 'iconfont icon-love-b1'}
-          />
+        <ButtonTone onClick={(e) => toggleIsLikeSong(e)} backgroundColor={'#fff'}>
+          <i className={isLikeSong ? 'iconfont icon-love-b' : 'iconfont icon-love-b1'} />
         </ButtonTone>
       </div>
       <div className="playlist-item-time">{formatMinuteSecond(song.dt)}</div>

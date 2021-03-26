@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useState } from 'react';
 
 import CoverImg from '@/components/cover-img';
-import PlayListItem from '@/components/playlist-item/';
+import PlayListItem from './playlist-item';
 import { PlayListWrapper } from './style';
 import { getPlaylistDetail } from '@/service/playlist';
 import { getSongDetail } from '@/service/song';
