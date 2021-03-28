@@ -1,7 +1,9 @@
 import React, { memo } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { setCurrentSongAction } from '@/store/player/actionCreators';
+import { message } from 'antd';
+
+import { setCurrentSongAction, setPlaylistAction } from '@/store/player/actionCreators';
 import useLikeSong from '@/hooks/likeSongHook';
 
 import { getSongArtists, getSizeImage, formatMinuteSecond } from '@/utils/format-utils';
@@ -14,7 +16,12 @@ export default memo(function PlayListItem(props) {
 
   const dispatch = useDispatch();
   function playSong(song) {
-    dispatch(setCurrentSongAction(song));
+    if (song.playable) {
+      dispatch(setPlaylistAction());
+      dispatch(setCurrentSongAction(song));
+    } else {
+      message.error(song.reason);
+    }
   }
 
   return (

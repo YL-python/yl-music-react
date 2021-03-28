@@ -305,3 +305,51 @@ main {
   padding-bottom: 96px;
   box-sizing: content-box;
 }
+/* andt toptip 自定义样式 */
+.ant-tooltip-content {
+  background-color: var(--color-primary-bg);
+}
+.ant-tooltip-arrow-content {
+  background-color: var(--color-primary-bg);
+}
+.ant-tooltip-inner {
+  text-align: center;
+  color: var(--color-primary);
+  background-color: var(--color-primary-bg);
+  /* border-radius: 5px; */
+}
+/* andt model 自定义样式 */
+.ant-modal-mask {
+  background-color: hsla(0, 0%, 100%, 0.58);
+}
+.ant-modal {
+  top: 150px;
+}
+.ant-modal-content {
+  border-radius: 12px;
+  background: hsla(0, 0%, 100%, 0.78);
+  box-shadow: 0 12px 16px -8px rgb(0 0 0 / 10%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(12px) opacity(1);
+}
+.ant-modal-header {
+  background-color: transparent;
+  border: none;
+}
+.ant-modal-title {
+  font-weight: 600;
+  font-size: 20px;
+}
+.ant-modal-body {
+  padding-top: 0;
+}
+
+/* andt spin 自定义样式 */
+.ant-spin-spinning {
+  display: block;
+  margin: 0 auto;
+  color: var(--color-primary);
+}
+.ant-spin-dot {
+  font-size: 50px;
+}

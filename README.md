@@ -21,4 +21,6 @@ yarn add immutable                // 数据拷贝的时候简约性能
 yarn add redux-immutable          // 配置服务器 路径别名
 yarn add react-transition-group   // 制作动画
 yarn add react-lazyload           // 图片懒加载
+yarn add dayjs                    // 时间格式化
+yarn add better-scroll            // 滚动组件
 ```

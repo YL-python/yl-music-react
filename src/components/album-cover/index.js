@@ -6,12 +6,14 @@ import { AlbumCoverWrapper } from './style';
 import { getPlayCount, getSizeImage } from '@/utils/format-utils';
 
 export default memo(function AlbumCover(props) {
-  let picUrl = props.album?.picUrl;
+  let picUrl = props.album?.picUrl || props.album?.coverImgUrl;
   picUrl = getSizeImage(picUrl, props.size);
   let playCount = props.album?.playCount;
   playCount = getPlayCount(playCount);
-  const copywriter = props.album?.copywriter;
+
+  const copywriter = props.album?.copywriter || props.album?.description;
   const name = props.album?.name;
+  const updateTime = props.album?.updateFrequency;
 
   function gotoPlayList() {
     props.history.push(`/playlist/${props.album.id}`);
@@ -35,7 +37,7 @@ export default memo(function AlbumCover(props) {
           <div className="cover-info">
             <span className="play-count">
               <i className="play iconfont icon-1_music81" />
-              {playCount}
+              {playCount} {updateTime}
             </span>
           </div>
         ) : (

@@ -9,7 +9,7 @@ import { mapTrackPlayableStatus } from '@/utils/common';
 export function getSongDetail(ids) {
   return request({ url: '/song/detail', method: 'get', params: { ids } }).then((data) => {
     data.songs = mapTrackPlayableStatus(data.songs, data.privileges);
-    data.songs.sort((a, b) => b.playable - a.playable);
+    // data.songs.sort((a, b) => b.playable - a.playable);
     return data;
   });
 }

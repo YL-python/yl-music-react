@@ -1,4 +1,4 @@
-export default class {
+class Lyric {
   constructor(lrc) {
     this.lrc = lrc;
     this.lyric = this._parseLyric(lrc?.lrc?.lyric || '');
@@ -45,3 +45,4 @@ export default class {
     return lrcObj;
   }
 }
+export default Lyric;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const PlayListWrapper = styled.div`
+export const PlaylistWrapper = styled.div`
   .playlist-detail {
     display: flex;
     margin-bottom: 72px;
@@ -48,6 +48,16 @@ export const PlayListWrapper = styled.div`
         button {
           margin-right: 16px;
         }
+      }
+    }
+  }
+  .playlist-list {
+    .ant-spin-spinning {
+      display: block;
+      margin: 0 auto;
+      color: var(--color-primary);
+      .ant-spin-dot {
+        font-size: 50px;
       }
     }
   }

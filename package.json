@@ -10,6 +10,8 @@
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.14.0",
     "axios": "^0.21.1",
+    "better-scroll": "^2.2.1",
+    "dayjs": "^1.10.4",
     "immutable": "^4.0.0-rc.12",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 export function getPlayCount(count) {
   if (count < 0) return;
   if (count < 10000) {
@@ -15,30 +17,8 @@ export function getSongArtists(ar) {
   return ar.map((a) => a.name).join(', ');
 }
 
-export function formatDate(time, fmt) {
-  let date = new Date(time);
-
-  if (/(y+)/.test(fmt)) {
-    fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
-  }
-  let o = {
-    'M+': date.getMonth() + 1,
-    'd+': date.getDate(),
-    'h+': date.getHours(),
-    'm+': date.getMinutes(),
-    's+': date.getSeconds(),
-  };
-  for (let k in o) {
-    if (new RegExp(`(${k})`).test(fmt)) {
-      let str = o[k] + '';
-      fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? str : padLeftZero(str));
-    }
-  }
-  return fmt;
-}
-
-function padLeftZero(str) {
-  return ('00' + str).substr(str.length);
+export function formatDate(time, fmt = 'YYYY年MM月DD日') {
+  return dayjs(time).format(fmt);
 }
 
 export function formatMonthDay(time) {
@@ -47,4 +27,18 @@ export function formatMonthDay(time) {
 
 export function formatMinuteSecond(time) {
   return formatDate(time, 'mm:ss');
+}
+
+export function parseUrl(url) {
+  const res = {};
+  if (!url) return res;
+  url
+    .substr(url.indexOf('?') + 1)
+    .split('&')
+    .map((item) => {
+      const [key, value] = item.split('=');
+      res[key] = decodeURIComponent(value);
+      return '';
+    });
+  return res;
 }
