@@ -12,6 +12,7 @@ import { PLAYMODE } from '@/assets/js/config';
 import {
   setPlayModeAction,
   switchCurrentSongAction,
+  changeFullScreenAction,
 } from '@/store/player/actionCreators';
 
 export default memo(function Player() {
@@ -22,10 +23,11 @@ export default memo(function Player() {
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(50);
 
-  const { currentSong, playMode } = useSelector(
+  const { currentSong, playMode, fullScreen } = useSelector(
     (state) => ({
       currentSong: state.getIn(['player', 'currentSong']),
       playMode: state.getIn(['player', 'playMode']),
+      fullScreen: state.getIn(['player', 'fullScreen']),
     }),
     shallowEqual
   );
@@ -152,6 +154,10 @@ export default memo(function Player() {
     },
     [dispatch]
   );
+  // 切换 歌词 大小屏
+  const switchFullScreen = useCallback(() => {
+    dispatch(changeFullScreenAction(!fullScreen));
+  }, [fullScreen, dispatch]);
 
   // 常量 （vue中的计算属性？？）
   const playModeText = PLAYMODE.getPlayModeText(playMode);
@@ -224,7 +230,7 @@ export default memo(function Player() {
             />
           </div>
           <Tooltip title="查看歌词" key="lyric">
-            <ButtonIcon>
+            <ButtonIcon onClick={(e) => switchFullScreen()}>
               <i className="iconfont icon-icon-arrow-top2" />
             </ButtonIcon>
           </Tooltip>

@@ -5,6 +5,7 @@ class Lyric {
     this.tlyric = this._parseLyric(lrc?.tlyric?.lyric || '');
     this.lyricuser = lrc.lyricUser;
     this.transuser = lrc.transUser;
+    this.lyricWithTranslation = this._getLWT();
   }
 
   // 给一个时间，返回 歌词 的 索引
@@ -43,6 +44,37 @@ class Lyric {
     }
     lrcObj.sort((a, b) => a.time - b.time);
     return lrcObj;
+  }
+
+  //
+  _getLWT() {
+    let ret = [];
+    // 空内容的去除
+    const lyricFiltered = this.lyric.filter(({ content }) => Boolean(content));
+    // content统一转换数组形式
+    if (lyricFiltered.length) {
+      lyricFiltered.forEach((l) => {
+        const { rawTime, time, content } = l;
+        const lyricItem = { time, content, contents: [content] };
+        const sameTimeTLyric = this.tlyric.find(
+          ({ rawTime: tLyricRawTime }) => tLyricRawTime === rawTime
+        );
+        if (sameTimeTLyric) {
+          const { content: tLyricContent } = sameTimeTLyric;
+          if (content) {
+            lyricItem.contents.push(tLyricContent);
+          }
+        }
+        ret.push(lyricItem);
+      });
+    } else {
+      ret = lyricFiltered.map(({ time, content }) => ({
+        time,
+        content,
+        contents: [content],
+      }));
+    }
+    return ret;
   }
 }
 export default Lyric;

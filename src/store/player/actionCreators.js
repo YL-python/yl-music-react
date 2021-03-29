@@ -31,6 +31,26 @@ const changeMusicPlaylisteAction = (musicPlaylist) => ({
   type: actionTypes.CHANGE_MUSICPLAYLIST,
   musicPlaylist,
 });
+export const changeFullScreenAction = (fullScreen) => ({
+  type: actionTypes.CHANGE_FULLSCREEN,
+  fullScreen,
+});
+export const changeProgerssAction = (progress) => ({
+  type: actionTypes.CHANGE_PROGRESS,
+  progress,
+});
+export const changeVolumeAction = (volume) => ({
+  type: actionTypes.CHANGE_VOLUME,
+  volume,
+});
+export const changeIsPlayingAction = (isPlaying) => ({
+  type: actionTypes.CHANGE_IS_PLAYING,
+  isPlaying,
+});
+export const changeIsChangeAction = (isChange) => ({
+  type: actionTypes.CHANGE_IS_CHANGE,
+  isChange,
+});
 
 export const setMabyPlaylistAction = (maybePlaylist) => {
   return (dispatch) => {
@@ -43,6 +63,7 @@ export const setCurrentSongAction = (currentSong) => {
     dispatch(changeCurrentSongAction(currentSong));
     getLyric(currentSong.id).then((res) => {
       let lyric = new Lyric(res);
+
       dispatch(changeLyricAction(lyric));
     });
   };
