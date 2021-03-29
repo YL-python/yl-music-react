@@ -2,11 +2,7 @@ import React, { memo, useState, useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import { ScrollLyricWrapper } from './style';
-import {
-  changeProgerssAction,
-  changeIsPlayingAction,
-  switchCurrentSongAction,
-} from '@/store/player/actionCreators';
+import { changeProgerssAction } from '@/store/player/actionCreators';
 
 export default memo(function ScrollLyric(props) {
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -27,7 +23,7 @@ export default memo(function ScrollLyric(props) {
   }, []);
   useEffect(() => {
     setActiveIndex(lyric.seek(progress / 1000));
-  }, [progress]);
+  }, [progress, lyric]);
 
   // 点击歌词去切换 歌曲进度
   function changeProgressWidthLyric(lyric) {

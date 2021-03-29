@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect } from 'react';
+import React, { memo, useCallback } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { Slider } from 'antd';
 
