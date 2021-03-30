@@ -1,4 +1,5 @@
 import axios from 'axios';
+const development = process.env.NODE_ENV === 'development';
 
 // const devBaseURL = 'http://123.207.32.32:9001';
 const devBaseURL = 'http://coderyl.top/wyymusic';
@@ -25,12 +26,10 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (response) => {
-    console.log(
-      response.config.method,
-      response.config.baseURL,
-      response.config.url,
-      response.data
-    );
+    if (development) {
+      console.log(response.config.method, response.config.url, response.data);
+    }
+
     return response.data;
   },
   (err) => {

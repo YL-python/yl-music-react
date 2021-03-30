@@ -22,7 +22,15 @@ export default memo(function Lyric(props) {
   const audioRef = props.audio;
   const [isLikeSong, toggleIsLikeSong] = useLikeSong();
 
-  const { fullScreen, currentSong, progress, isPlaying, volume, playMode } = useSelector(
+  const {
+    fullScreen,
+    currentSong,
+    progress,
+    isPlaying,
+    volume,
+    playMode,
+    isChange,
+  } = useSelector(
     (state) => ({
       fullScreen: state.getIn(['player', 'fullScreen']),
       currentSong: state.getIn(['player', 'currentSong']),
@@ -30,6 +38,7 @@ export default memo(function Lyric(props) {
       isPlaying: state.getIn(['player', 'isPlaying']),
       volume: state.getIn(['player', 'volume']),
       playMode: state.getIn(['player', 'playMode']),
+      isChange: state.getIn(['player', 'isChange']),
     }),
     shallowEqual
   );
@@ -40,10 +49,10 @@ export default memo(function Lyric(props) {
   // 歌曲 Slider  事件
   const sliderChange = useCallback(
     (value) => {
-      dispatch(changeIsChangeAction(true));
+      if (!isChange) dispatch(changeIsChangeAction(true));
       dispatch(changeProgerssAction(value));
     },
-    [dispatch]
+    [dispatch, isChange]
   );
   // 歌曲 Slider  事件
   const sliderAfterChange = useCallback(

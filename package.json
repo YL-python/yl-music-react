@@ -1,5 +1,5 @@
 {
-  "name": "yl-music-react-pc2",
+  "name": "yl-music",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -33,6 +33,7 @@
     "test": "craco test",
     "eject": "react-scripts eject"
   },
+  "homepage": "/yl-music-rp/",
   "eslintConfig": {
     "extends": [
       "react-app",

@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
 export const ScrollLyricWrapper = styled.div`
-  height: 100%;
+  /* height: 100%; */
+  /* overflow: hidden; */
+  /* overflow-y: auto; */
   display: flex;
   flex-direction: column;
   max-width: 460px;
-  overflow-y: auto;
   transition: 0.5s;
   font-size: ${(props) => props.size};
   .line {
@@ -28,9 +29,12 @@ export const ScrollLyricWrapper = styled.div`
     opacity: 0.98;
     transition: 0.5s;
   }
-  .block {
+  .top-block {
     text-align: center;
     opacity: 0.98;
     margin-top: 50vh;
+  }
+  .bottom-block {
+    margin-bottom: 50vh;
   }
 `;

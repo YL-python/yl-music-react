@@ -22,7 +22,15 @@ export default memo(function Player(props) {
   const audioRef = props.audio;
   const [isLikeSong, toggleIsLikeSong] = useLikeSong();
 
-  const { currentSong, playMode, fullScreen, progress, isPlaying, volume } = useSelector(
+  const {
+    currentSong,
+    playMode,
+    fullScreen,
+    progress,
+    isChange,
+    isPlaying,
+    volume,
+  } = useSelector(
     (state) => ({
       currentSong: state.getIn(['player', 'currentSong']),
       playMode: state.getIn(['player', 'playMode']),
@@ -30,6 +38,7 @@ export default memo(function Player(props) {
       isPlaying: state.getIn(['player', 'isPlaying']),
       volume: state.getIn(['player', 'volume']),
       progress: state.getIn(['player', 'progress']),
+      isChange: state.getIn(['player', 'isChange']),
     }),
     shallowEqual
   );
@@ -48,10 +57,10 @@ export default memo(function Player(props) {
   // 歌曲 Slider  事件
   const sliderChange = useCallback(
     (value) => {
-      dispatch(changeIsChangeAction(true));
+      if (!isChange) dispatch(changeIsChangeAction(true));
       dispatch(changeProgerssAction(value));
     },
-    [dispatch]
+    [dispatch, isChange]
   );
   // 歌曲 Slider  事件
   const sliderAfterChange = useCallback(
