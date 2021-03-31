@@ -13,7 +13,7 @@ const changeRecommendListAction = (recommendList) => ({
 export const getRecommendListAction = (limit) => {
   return (dispatch) => {
     getRecommendList(limit).then((res) => {
-      dispatch(changeRecommendListAction(res.result));
+      dispatch(changeRecommendListAction(res.albums));
     });
   };
 };

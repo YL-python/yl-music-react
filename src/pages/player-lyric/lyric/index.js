@@ -44,7 +44,7 @@ export default memo(function Lyric(props) {
   );
   const dispatch = useDispatch();
 
-  const imageUrl = getSizeImage(currentSong.al?.picUrl, 512);
+  const imageUrl = getSizeImage(currentSong.picUrl, 512);
 
   // 歌曲 Slider  事件
   const sliderChange = useCallback(
@@ -146,7 +146,7 @@ export default memo(function Lyric(props) {
                 </div>
                 <div className="subtitle">
                   <span>
-                    {currentSong.ar[0].name} - {currentSong.al.name}
+                    {currentSong.artists} - {currentSong.album}
                   </span>
                 </div>
               </div>

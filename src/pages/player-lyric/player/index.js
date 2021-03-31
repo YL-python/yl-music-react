@@ -156,13 +156,13 @@ export default memo(function Player(props) {
       />
       <div className="controls wrap-v1">
         <div className="playing">
-          <img src={getSizeImage(currentSong.al?.picUrl, 128)} alt="" />
+          <img src={getSizeImage(currentSong.picUrl, 128)} alt="" />
           <div className="song-info">
-            <div className="name" title={currentSong?.name}>
-              {currentSong?.name}
+            <div className="name" title={currentSong.name}>
+              {currentSong.name}
             </div>
-            <a href="#/" className="artist" title={getSongArtists(currentSong.ar)}>
-              {getSongArtists(currentSong.ar)}
+            <a href="#/" className="artist" title={currentSong.artists}>
+              {currentSong.artists}
             </a>
           </div>
           <div className="like-button">

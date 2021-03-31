@@ -38,10 +38,11 @@ export default memo(function Playlist(props) {
   useEffect(() => {
     getPlaylistDetail(id).then((res) => {
       setPlaylistDetail(res.playlist);
+
       let ids = res.playlist.trackIds.map((item) => item.id);
       getSongDetail(ids.join(',')).then((res) => {
-        setSongList(res.songs);
-        dispatch(setMabyPlaylistAction(res.songs));
+        setSongList(res);
+        dispatch(setMabyPlaylistAction(res));
       });
     });
   }, [dispatch, id]);
@@ -53,7 +54,7 @@ export default memo(function Playlist(props) {
   function showDescription() {
     setIsModalVisible(true);
   }
-  function platThisPlaylist() {
+  function playThisPlaylist() {
     dispatch(setPlaylistAction());
     dispatch(setCurrentSongAction(maybePlaylist[0]));
   }
@@ -75,7 +76,7 @@ export default memo(function Playlist(props) {
             {playlistDetail.description}
           </div>
           <div className="buttons">
-            <ButtonTone isButton onClick={(e) => platThisPlaylist()}>
+            <ButtonTone isButton onClick={(e) => playThisPlaylist()}>
               <i className="iconfont icon-1_music81"></i>
               <span>播放</span>
             </ButtonTone>

@@ -31,6 +31,7 @@ const changeLoadingAction = (loading) => ({
   loading,
 });
 
+// 切换顶部分类
 export const toggleCategorys = (name) => {
   return (dispatch, getState) => {
     let categories = getState().getIn(['explore', 'categories']);
@@ -71,20 +72,20 @@ const getExplorelistFromNetwork = () => {
       dispatch(changeExplorelistAction([]));
       getRecommendList(100).then((res) => {
         // 没有更多了也没有在加载了
-        dispatch(setNetworkResultAction(res.result, false, false));
+        dispatch(setNetworkResultAction(res.albums, false, false));
       });
     } else if (searchCategorie === '精品歌单') {
       let before =
         explorelist.length !== 0 ? explorelist[explorelist.length - 1].updateTime : 0;
       highQualityPlaylist({ limit: 20, before }).then((res) => {
         dispatch(
-          setNetworkResultAction([...explorelist, ...res.playlists], res.more, false)
+          setNetworkResultAction([...explorelist, ...res.albums], res.more, false)
         );
       });
     } else if (searchCategorie === '排行榜') {
       dispatch(changeExplorelistAction([]));
       toplists().then((res) => {
-        dispatch(setNetworkResultAction(res.list, false, false));
+        dispatch(setNetworkResultAction(res.albums, false, false));
       });
     } else {
       topPlaylist({
@@ -92,7 +93,7 @@ const getExplorelistFromNetwork = () => {
         offset: explorelist.length,
       }).then((res) => {
         dispatch(
-          setNetworkResultAction([...explorelist, ...res.playlists], res.more, false)
+          setNetworkResultAction([...explorelist, ...res.albums], res.more, false)
         );
       });
     }

@@ -6,17 +6,12 @@ import { AlbumCoverWrapper } from './style';
 import { getPlayCount, getSizeImage } from '@/utils/format-utils';
 
 export default memo(function AlbumCover(props) {
-  let picUrl = props.album?.picUrl || props.album?.coverImgUrl;
-  picUrl = getSizeImage(picUrl, props.size);
-  let playCount = props.album?.playCount;
-  playCount = getPlayCount(playCount);
-
-  const copywriter = props.album?.copywriter || props.album?.description;
-  const name = props.album?.name;
-  const updateTime = props.album?.updateFrequency;
+  let { album, size } = props;
+  const picUrl = getSizeImage(album.picUrl, size);
+  const playCount = getPlayCount(album.playCount);
 
   function gotoPlayList() {
-    props.history.push(`/playlist/${props.album.id}`);
+    props.history.push(`/playlist/${album.id}`);
   }
   return (
     <AlbumCoverWrapper picUrl={picUrl}>
@@ -28,7 +23,7 @@ export default memo(function AlbumCover(props) {
             </button>
           </div>
           {/* <img alt="错误" src={picUrl}></img> */}
-          <Image preview={false} src={picUrl} />
+          <Image preview={false} src={album.picUrl} />
           <div className="shadow fade"></div>
         </div>
       </div>
@@ -37,18 +32,18 @@ export default memo(function AlbumCover(props) {
           <div className="cover-info">
             <span className="play-count">
               <i className="play iconfont icon-1_music81" />
-              {playCount} {updateTime}
+              {playCount} {album.updateFrequency}
             </span>
           </div>
         ) : (
           ''
         )}
 
-        <div className="cover-title text-nowrap2" title={name}>
-          <a href="#/">{name}</a>
+        <div className="cover-title text-nowrap2" title={album.name}>
+          <a href="#/">{album.name}</a>
         </div>
-        <div className="cover-info text-nowrap2" title={copywriter}>
-          <span>{copywriter}</span>
+        <div className="cover-info text-nowrap2" title={album.copywriter}>
+          <span>{album.copywriter}</span>
         </div>
       </div>
     </AlbumCoverWrapper>

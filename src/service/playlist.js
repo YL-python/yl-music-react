@@ -1,5 +1,6 @@
 import request from './request';
 import { mapTrackPlayableStatus } from '@/utils/common';
+import Album from '@/assets/js/album';
 
 /**
  * 推荐歌单
@@ -8,7 +9,10 @@ import { mapTrackPlayableStatus } from '@/utils/common';
  * - 调用例子 : /personalized?limit=1
  */
 export function getRecommendList(limit = 40) {
-  return request({ url: '/personalized', params: { limit } });
+  return request({ url: '/personalized', params: { limit } }).then((res) => {
+    res.albums = res.result.map((item) => new Album(item));
+    return res;
+  });
 }
 
 /**
@@ -36,7 +40,10 @@ export function getPlaylistDetail(id) {
  * 说明 : 调用此接口,可获取所有榜单 接口地址 : /toplist
  */
 export function toplists() {
-  return request({ url: '/toplist' });
+  return request({ url: '/toplist' }).then((res) => {
+    res.albums = res.list.map((item) => new Album(item));
+    return res;
+  });
 }
 
 /**
@@ -51,7 +58,10 @@ export function toplists() {
  * @param {number} params.before
  */
 export function highQualityPlaylist(params) {
-  return request({ url: '/top/playlist/highquality', params });
+  return request({ url: '/top/playlist/highquality', params }).then((res) => {
+    res.albums = res.playlists.map((item) => new Album(item));
+    return res;
+  });
 }
 
 /**
@@ -66,5 +76,10 @@ export function highQualityPlaylist(params) {
  * @param {number=} params.limit
  */
 export function topPlaylist(params) {
-  return request({ url: '/top/playlist', params: { ...params, limit: 20 } });
+  return request({ url: '/top/playlist', params: { ...params, limit: 20 } }).then(
+    (res) => {
+      res.albums = res.playlists.map((item) => new Album(item));
+      return res;
+    }
+  );
 }
