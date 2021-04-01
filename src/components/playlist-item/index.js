@@ -12,7 +12,7 @@ import ButtonTone from '@/components/button-tone';
 
 export default memo(function PlayListItem(props) {
   const song = props.song;
-  const [isLikeSong, toggleIsLikeSong] = useLikeSong();
+  const [isLikeSong, toggleIsLikeSong] = useLikeSong(song);
 
   const dispatch = useDispatch();
   function playSong(song) {
@@ -35,7 +35,7 @@ export default memo(function PlayListItem(props) {
       </div>
       <div className="playlist-item-album">{song.album}</div>
       <div className="playlist-item-actions">
-        <ButtonTone onClick={(e) => toggleIsLikeSong(e)} backgroundColor={'#fff'}>
+        <ButtonTone onClick={(e) => toggleIsLikeSong(song, e)} backgroundColor={'#fff'}>
           <i className={isLikeSong ? 'iconfont icon-love-b' : 'iconfont icon-love-b1'} />
         </ButtonTone>
       </div>

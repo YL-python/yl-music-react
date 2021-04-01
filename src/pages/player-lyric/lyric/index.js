@@ -19,9 +19,6 @@ import {
 } from '@/store/player/actionCreators';
 
 export default memo(function Lyric(props) {
-  const audioRef = props.audio;
-  const [isLikeSong, toggleIsLikeSong] = useLikeSong();
-
   const {
     fullScreen,
     currentSong,
@@ -43,6 +40,8 @@ export default memo(function Lyric(props) {
     shallowEqual
   );
   const dispatch = useDispatch();
+  const audioRef = props.audio;
+  const [isLikeSong, toggleIsLikeSong] = useLikeSong(currentSong);
 
   const imageUrl = getSizeImage(currentSong.picUrl, 512);
 
@@ -151,7 +150,7 @@ export default memo(function Lyric(props) {
                 </div>
               </div>
               <div className="buttons">
-                <ButtonIcon onClick={(e) => toggleIsLikeSong(e)}>
+                <ButtonIcon onClick={(e) => toggleIsLikeSong(currentSong, e)}>
                   <i
                     className={
                       isLikeSong ? 'iconfont icon-love-b' : 'iconfont icon-love-b1'

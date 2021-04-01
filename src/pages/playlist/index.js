@@ -10,7 +10,8 @@ import { getPlaylistDetail } from '@/service/playlist';
 import { getSongDetail } from '@/service/song';
 import ButtonTone from '@/components/button-tone';
 import Hidden from '@/components/hidden';
-import { formatDate } from '@/utils/format-utils';
+import useLikePlaylist from '@/hooks/likePlaylistHook';
+
 import {
   setMabyPlaylistAction,
   setPlaylistAction,
@@ -19,14 +20,14 @@ import {
 
 export default memo(function Playlist(props) {
   const dispatch = useDispatch();
-  const [isPlaylistLike, setIsPlaylistLike] = useState(false);
   const [playlistDetail, setPlaylistDetail] = useState([]);
   const [songList, setSongList] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   //  常量
   const id = props.match.params.id;
-  const picUrl = playlistDetail.coverImgUrl;
   const size = 512;
+
+  const [isLikePlaylist, toggleIsLikePlaylist] = useLikePlaylist(playlistDetail);
 
   const { maybePlaylist } = useSelector(
     (state) => ({
@@ -37,7 +38,7 @@ export default memo(function Playlist(props) {
 
   useEffect(() => {
     getPlaylistDetail(id).then((res) => {
-      setPlaylistDetail(res.playlist);
+      setPlaylistDetail(res.playlistDetail);
 
       let ids = res.playlist.trackIds.map((item) => item.id);
       getSongDetail(ids.join(',')).then((res) => {
@@ -46,10 +47,6 @@ export default memo(function Playlist(props) {
       });
     });
   }, [dispatch, id]);
-
-  const changeLike = function () {
-    setIsPlaylistLike(!isPlaylistLike);
-  };
 
   function showDescription() {
     setIsModalVisible(true);
@@ -62,15 +59,12 @@ export default memo(function Playlist(props) {
   return (
     <PlaylistWrapper>
       <div className="playlist-detail">
-        <CoverImg size={size} picUrl={picUrl} />
+        <CoverImg size={size} picUrl={playlistDetail.picUrl} />
         <div className="playlist-desc">
           <div className="playlist-title">{playlistDetail.name}</div>
-          <div className="playlist-artist">
-            Playlist by {playlistDetail.creator?.nickname}
-          </div>
+          <div className="playlist-artist">Playlist by {playlistDetail.nickname}</div>
           <div className="date-and-count">
-            最后更新于 {formatDate(playlistDetail.updateTime)} ·{' '}
-            {playlistDetail.trackCount} 首歌
+            最后更新于 {playlistDetail.updateTime} · {playlistDetail.trackCount} 首歌
           </div>
           <div className="description" onClick={(e) => showDescription()}>
             {playlistDetail.description}
@@ -81,12 +75,12 @@ export default memo(function Playlist(props) {
               <span>播放</span>
             </ButtonTone>
             <ButtonTone
-              onClick={(e) => changeLike()}
-              backgroundColor={!isPlaylistLike ? 'var(--color-secondary-bg)' : ''}
+              onClick={(e) => toggleIsLikePlaylist(playlistDetail, e)}
+              backgroundColor={!isLikePlaylist ? 'var(--color-secondary-bg)' : ''}
             >
               <i
                 className={
-                  isPlaylistLike ? 'iconfont icon-love-b' : 'iconfont icon-love-b1'
+                  isLikePlaylist ? 'iconfont icon-love-b' : 'iconfont icon-love-b1'
                 }
               />
             </ButtonTone>

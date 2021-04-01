@@ -1,6 +1,7 @@
 import request from './request';
 import { mapTrackPlayableStatus } from '@/utils/common';
 import Album from '@/assets/js/album';
+import Playlist from '@/assets/js/playlist.js';
 
 /**
  * 推荐歌单
@@ -26,13 +27,18 @@ export function getRecommendList(limit = 40) {
  */
 export function getPlaylistDetail(id) {
   let params = { id };
-  return request({ url: '/playlist/detail', params }).then((data) => {
-    data.playlist.tracks = mapTrackPlayableStatus(
-      data.playlist.tracks,
-      data.privileges || []
-    );
-    return data;
-  });
+  return request({ url: '/playlist/detail', params })
+    .then((data) => {
+      data.playlist.tracks = mapTrackPlayableStatus(
+        data.playlist.tracks,
+        data.privileges || []
+      );
+      return data;
+    })
+    .then((data) => {
+      data.playlistDetail = new Playlist(data.playlist);
+      return data;
+    });
 }
 
 /**
