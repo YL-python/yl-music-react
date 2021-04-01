@@ -46,13 +46,14 @@ yarn add redux                    // 全局数据管理
 yarn add react-redux              // 提供context和provide 将 react 和 redux 结合起来
 yarn add redux-thunk              // redux的中间件 使dispatch的时候可以使用函数 做异步请求
 yarn add axios                    // 网络请求
-yarn add immutable                // 数据拷贝的时候简约性能
+yarn add immutable                // 数据拷贝的时候节约性能
 yarn add redux-immutable          // 配置服务器 路径别名
 yarn add react-transition-group   // 制作动画
 yarn add react-lazyload           // 图片懒加载
 yarn add dayjs                    // 时间格式化
 yarn add better-scroll            // 滚动组件
 yarn add redux-persist            // redux 数据持久化
+yarn add immer                    // immutable 的一个替代
 ```
 
 ## 目录结构
@@ -109,3 +110,7 @@ src
 首先就是 函数式组件不能绑定 `ref`，需要定义函数式组件的时候使用 `forwardRef`包裹，与`memo`同时使用的时候应该是 `memo(forwardRef(function componment))` 这样的写法
 
 在一个就是函数式组件，父组件调用子组件的时候，应该在子组件内部使用 `useImperativeHandle`不然的话，父组件只能访问到子组件的`Dom` 对象，并不能访问子组件的事件，具体写法参考 `scroll`组件
+
+### immer
+
+使用 redux 结合 redux-persist 发现 immutable 类型 redux-persist 并不支持，而且百度了半天都推荐使用 immer，一开始还不是很想使用 immer，但是上 npm 发现 immer 的周下载量大约是 immutable 的一倍了，所以就下定决心开个坑，之后要用 immer 重构一下这个项目。

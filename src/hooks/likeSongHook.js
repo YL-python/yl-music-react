@@ -6,7 +6,7 @@ import { changeLikeSongListAction } from '@/store/user/actionCreators';
 function useLikeSong(song) {
   const [isLikeSong, setIsLikeSong] = useState(false);
   const dispatch = useDispatch();
-  const { likeSongList, state } = useSelector(
+  const { likeSongList } = useSelector(
     (state) => ({
       likeSongList: state.getIn(['user', 'likeSongList']),
       state: state,
@@ -15,7 +15,6 @@ function useLikeSong(song) {
   );
 
   useEffect(() => {
-    console.log('state', state);
     setIsLikeSong(likeSongList.map((like) => like.id).includes(song.id));
   }, [likeSongList, song]);
 
