@@ -34,7 +34,7 @@ const changeLoadingAction = (loading) => ({
 // 切换顶部分类
 export const toggleCategorys = (name) => {
   return (dispatch, getState) => {
-    let categories = getState().getIn(['explore', 'categories']);
+    let categories = getState().explore.categories;
     let cat = categories.find((c) => c.name === name);
     cat.enable = !cat.enable;
     categories = categories.map((c) => {
@@ -63,8 +63,8 @@ const setNetworkResultAction = (explorelist, hasMore, loading) => {
 const getExplorelistFromNetwork = () => {
   return (dispatch, getState) => {
     // 获取值
-    const explorelist = getState().getIn(['explore', 'explorelist']);
-    const searchCategorie = getState().getIn(['explore', 'searchCategorie']);
+    const explorelist = getState().explore.explorelist;
+    const searchCategorie = getState().explore.searchCategorie;
     // 更新开始加载状态
     dispatch(setStartNetworkAction());
     // 根据 searchCategorie 去加载列表

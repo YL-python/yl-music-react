@@ -73,8 +73,8 @@ export const setCurrentSongAction = (currentSong) => {
 export const switchCurrentSongAction = (flag) => {
   return (dispatch, getState) => {
     // 获取真实的播放列表
-    const musicPlaylist = getState().getIn(['player', 'musicPlaylist']);
-    const currentSong = getState().getIn(['player', 'currentSong']);
+    const musicPlaylist = getState().player.musicPlaylist;
+    const currentSong = getState().player.currentSong;
     let currentIndex = musicPlaylist.findIndex((song) => song.id === currentSong.id);
     currentIndex += flag;
     let listLength = musicPlaylist.length;
@@ -97,8 +97,8 @@ export const setPlayModeAction = (playMode) => {
 // 根据播放模式设置播放列表的方法  第一次点击歌曲的时候主动设置  每次切换歌曲播放模式的时候被动设置
 export const setPlaylistAction = () => {
   return (dispatch, getState) => {
-    const maybePlaylist = getState().getIn(['player', 'maybePlaylist']);
-    const playMode = getState().getIn(['player', 'playMode']);
+    const maybePlaylist = getState().player.maybePlaylist;
+    const playMode = getState().player.playMode;
     dispatch(changeSequencePlaylisteAction(maybePlaylist));
     if (playMode === PLAYMODE.random) {
       let playlist = [...maybePlaylist];

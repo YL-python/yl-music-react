@@ -11,10 +11,7 @@ import { HomeWrapper } from './style';
 import AlbumCover from '@/components/album-cover';
 
 export default memo(function Home(props) {
-  const { recommendList } = useSelector(
-    (state) => ({ recommendList: state.getIn(['home', 'recommendList']) }),
-    shallowEqual
-  );
+  const { recommendList } = useSelector((state) => state.home, shallowEqual);
   const dispatch = useDispatch();
   useEffect(() => {
     // 优先从 redux 中获取数据

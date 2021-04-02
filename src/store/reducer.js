@@ -1,5 +1,5 @@
-// import { combineReducers } from 'redux';
-import { combineReducers } from 'redux-immutable';
+import { combineReducers } from 'redux';
+// import { combineReducers } from 'redux-immutable';
 
 // 引入每一个模块的 reducer
 import { reducer as homeReducer } from './home';

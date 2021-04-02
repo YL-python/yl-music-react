@@ -27,18 +27,8 @@ export default memo(function Player(props) {
     isChange,
     isPlaying,
     volume,
-  } = useSelector(
-    (state) => ({
-      currentSong: state.getIn(['player', 'currentSong']),
-      playMode: state.getIn(['player', 'playMode']),
-      fullScreen: state.getIn(['player', 'fullScreen']),
-      isPlaying: state.getIn(['player', 'isPlaying']),
-      volume: state.getIn(['player', 'volume']),
-      progress: state.getIn(['player', 'progress']),
-      isChange: state.getIn(['player', 'isChange']),
-    }),
-    shallowEqual
-  );
+  } = useSelector((state) => state.player, shallowEqual);
+
   const dispatch = useDispatch();
   const audioRef = props.audio;
   const [isLikeSong, toggleIsLikeSong] = useLikeSong(currentSong);

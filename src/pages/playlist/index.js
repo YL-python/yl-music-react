@@ -29,12 +29,7 @@ export default memo(function Playlist(props) {
 
   const [isLikePlaylist, toggleIsLikePlaylist] = useLikePlaylist(playlistDetail);
 
-  const { maybePlaylist } = useSelector(
-    (state) => ({
-      maybePlaylist: state.getIn(['player', 'maybePlaylist']),
-    }),
-    shallowEqual
-  );
+  const { maybePlaylist } = useSelector((state) => state.player, shallowEqual);
 
   useEffect(() => {
     getPlaylistDetail(id).then((res) => {

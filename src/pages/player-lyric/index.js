@@ -15,15 +15,10 @@ import {
 export default memo(function PlayerAndLyric() {
   const audioRef = useRef();
 
-  const { currentSong, playMode, fullScreen, isChange } = useSelector((state) => {
-    console.log('state', state);
-    return {
-      currentSong: state.getIn(['player', 'currentSong']),
-      playMode: state.getIn(['player', 'playMode']),
-      fullScreen: state.getIn(['player', 'fullScreen']),
-      isChange: state.getIn(['player', 'isChange']),
-    };
-  }, shallowEqual);
+  const { currentSong, playMode, fullScreen, isChange } = useSelector(
+    (state) => state.player,
+    shallowEqual
+  );
   const dispatch = useDispatch();
 
   // 初始化  获取 url播放歌曲

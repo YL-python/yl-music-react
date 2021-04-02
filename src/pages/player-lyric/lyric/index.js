@@ -27,18 +27,7 @@ export default memo(function Lyric(props) {
     volume,
     playMode,
     isChange,
-  } = useSelector(
-    (state) => ({
-      fullScreen: state.getIn(['player', 'fullScreen']),
-      currentSong: state.getIn(['player', 'currentSong']),
-      progress: state.getIn(['player', 'progress']),
-      isPlaying: state.getIn(['player', 'isPlaying']),
-      volume: state.getIn(['player', 'volume']),
-      playMode: state.getIn(['player', 'playMode']),
-      isChange: state.getIn(['player', 'isChange']),
-    }),
-    shallowEqual
-  );
+  } = useSelector((state) => state.player, shallowEqual);
   const dispatch = useDispatch();
   const audioRef = props.audio;
   const [isLikeSong, toggleIsLikeSong] = useLikeSong(currentSong);

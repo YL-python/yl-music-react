@@ -10,13 +10,7 @@ export default memo(function ScrollLyric(props) {
   const lyricRef = useRef();
   const [activeIndex, setActiveIndex] = useState(-1);
 
-  const { lyric, progress } = useSelector(
-    (state) => ({
-      lyric: state.getIn(['player', 'lyric']),
-      progress: state.getIn(['player', 'progress']),
-    }),
-    shallowEqual
-  );
+  const { lyric, progress } = useSelector((state) => state.player, shallowEqual);
   const dispatch = useDispatch();
 
   useEffect(() => {

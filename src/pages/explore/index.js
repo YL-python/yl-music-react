@@ -19,12 +19,7 @@ export default memo(function Explore(props) {
   // store
   const dispatch = useDispatch();
   const { searchCategorie, explorelist, loading, hasMore } = useSelector(
-    (state) => ({
-      searchCategorie: state.getIn(['explore', 'searchCategorie']),
-      explorelist: state.getIn(['explore', 'explorelist']),
-      hasMore: state.getIn(['explore', 'hasMore']),
-      loading: state.getIn(['explore', 'loading']),
-    }),
+    (state) => state.explore,
     shallowEqual
   );
 

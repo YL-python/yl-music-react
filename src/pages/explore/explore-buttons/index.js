@@ -6,12 +6,7 @@ import { toggleCategorys } from '@/store/explore/actionCreators';
 
 export default memo(function ExploreButtons(props) {
   const [showMore, setShowMore] = useState(false);
-  const { categories } = useSelector(
-    (state) => ({
-      categories: state.getIn(['explore', 'categories']),
-    }),
-    shallowEqual
-  );
+  const { categories } = useSelector((state) => state.explore, shallowEqual);
   const dispatch = useDispatch();
 
   function toggleCat(name) {

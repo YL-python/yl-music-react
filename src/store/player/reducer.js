@@ -1,11 +1,11 @@
-import { Map } from 'immutable';
+import produce from 'immer';
 // 引入常量
 import * as actionTypes from './constants';
 import { PLAYMODE } from '@/assets/js/config';
 
 // 迭代 初始的 state
-const defaultState = Map({
-  currentSong: { ar: [] }, // 当前播放的歌曲
+const defaultState = {
+  currentSong: {}, // 当前播放的歌曲
   lyric: {}, // 歌词
   maybePlaylist: [], // 有可能的播放列表  点击歌单后会存歌单到这里
   sequencePlaylist: [], // 原始顺序的播放列表  用于展示的播放列表
@@ -17,33 +17,62 @@ const defaultState = Map({
   volume: 50, // 音量
   isPlaying: false, // 当前是否在播放
   isChange: false, // 当前是否在改变进度条
-});
+};
 
 // recommend 的 reducer函数 针对 action 类型去修改 state
 function reducer(state = defaultState, action) {
   switch (action.type) {
     case actionTypes.CHANGE_CURRENT_SONG:
-      return state.set('currentSong', action.currentSong);
+      return produce(state, (draftState) => {
+        draftState.currentSong = action.currentSong;
+      });
     case actionTypes.CHANGE_LYRIC:
-      return state.set('lyric', action.lyric);
+      return produce(state, (draftState) => {
+        draftState.lyric = action.lyric;
+      });
     case actionTypes.CHANGE_PLAYMODE:
-      return state.set('playMode', action.playMode);
+      return produce(state, (draftState) => {
+        draftState.playMode = action.playMode;
+      });
     case actionTypes.CHANGE_MAYBEPLAYLIST:
-      return state.set('maybePlaylist', action.maybePlaylist);
+      return produce(state, (draftState) => {
+        draftState.maybePlaylist = action.maybePlaylist;
+      });
     case actionTypes.CHANGE_MUSICPLAYLIST:
-      return state.set('musicPlaylist', action.musicPlaylist);
+      return produce(state, (draftState) => {
+        draftState.musicPlaylist = action.musicPlaylist;
+      });
+    // return state.set('musicPlaylist', action.musicPlaylist);
     case actionTypes.CHANGE_SEQUENCELAYLIST:
-      return state.set('sequencePlaylist', action.sequencePlaylist);
+      return produce(state, (draftState) => {
+        draftState.sequencePlaylist = action.sequencePlaylist;
+      });
+    // return state.set('sequencePlaylist', action.sequencePlaylist);
     case actionTypes.CHANGE_FULLSCREEN:
-      return state.set('fullScreen', action.fullScreen);
+      return produce(state, (draftState) => {
+        draftState.fullScreen = action.fullScreen;
+      });
+    // return state.set('fullScreen', action.fullScreen);
     case actionTypes.CHANGE_PROGRESS:
-      return state.set('progress', action.progress);
+      return produce(state, (draftState) => {
+        draftState.progress = action.progress;
+      });
+    // return state.set('progress', action.progress);
     case actionTypes.CHANGE_IS_PLAYING:
-      return state.set('isPlaying', action.isPlaying);
+      return produce(state, (draftState) => {
+        draftState.isPlaying = action.isPlaying;
+      });
+    // return state.set('isPlaying', action.isPlaying);
     case actionTypes.CHANGE_VOLUME:
-      return state.set('volume', action.volume);
+      return produce(state, (draftState) => {
+        draftState.volume = action.volume;
+      });
+    // return state.set('volume', action.volume);
     case actionTypes.CHANGE_IS_CHANGE:
-      return state.set('isChange', action.isChange);
+      return produce(state, (draftState) => {
+        draftState.isChange = action.isChange;
+      });
+    // return state.set('isChange', action.isChange);
     default:
       return state;
   }

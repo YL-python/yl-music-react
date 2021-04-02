@@ -24,11 +24,7 @@ export default memo(function Player() {
   const [volume, setVolume] = useState(50);
 
   const { currentSong, playMode, fullScreen } = useSelector(
-    (state) => ({
-      currentSong: state.getIn(['player', 'currentSong']),
-      playMode: state.getIn(['player', 'playMode']),
-      fullScreen: state.getIn(['player', 'fullScreen']),
-    }),
+    (state) => state.player,
     shallowEqual
   );
   const dispatch = useDispatch();
