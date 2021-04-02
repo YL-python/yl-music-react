@@ -114,3 +114,71 @@ src
 ### immer
 
 使用 redux 结合 redux-persist 发现 immutable 类型 redux-persist 并不支持，而且百度了半天都推荐使用 immer，一开始还不是很想使用 immer，但是上 npm 发现 immer 的周下载量大约是 immutable 的一倍了，所以就下定决心开个坑，之后要用 immer 重构一下这个项目。
+
+使用了一下挺简单的
+
+```JS
+return produce(state, (draftState) => {
+	draftState.categories = action.categories;
+});
+// state 是原 state   draftState，是immer库帮我们创建的有节约空间功能的草稿state,修改这个草稿state会节约性能
+```
+
+### redux-persist
+
+数据持久化方案，翻了翻官网很简单的，以我们的目录结构只需要修改 app.js 和合并 reducer时候的js 就好了，代码如下
+
++ app.js
+
+```js
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+
+
+<Provider store={store}>
+    <PersistGate persistor={persistStore(store)}>
+   		用这两个标签包裹 内容
+    </PersistGate>
+</Provider>
+```
+
++ reducer.js
+
+```js
+import { combineReducers } from 'redux';
+
+import { reducer as homeReducer } from './home';
+import { reducer as playerReducer } from './player';
+import { reducer as exploreReducer } from './explore';
+import { reducer as userReducer } from './user';
+
+// 数据持久化
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/es/storage';
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+
+// 持久化;
+const userConfig = {
+  key: 'user',
+  storage: storage,
+  // 黑白名单同时存在 忽略黑名单
+  // blacklist: ['likePlaylist'], // 不持久化白名单中的数据
+  // whitelist: ['likeSongList'], // 持久化白名单中的数据
+  stateReconciler: autoMergeLevel2,
+};
+
+const cReducer = combineReducers({
+  home: homeReducer,
+  player: playerReducer,
+  explore: exploreReducer,
+  user: persistReducer(userConfig, userReducer),
+});
+
+export default cReducer;
+
+
+// 主要就是这个函数 persistReducer ，一个参数是我们的配置config，一个参数就是真实的reducer
+// redux-persist 就是对 reducer进行了一个劫持，和创建state的时候并没有关系，
+// 可以针对不同的 reducer进行配置，也可以嵌套配置，反正理解了 是对 reducer进行的加强，逻辑就比较清晰了，有什么以为的可以在翻翻官方的说明文档
+```
+

@@ -146,7 +146,11 @@ export default memo(function Player(props) {
       />
       <div className="controls wrap-v1">
         <div className="playing">
-          <img src={getSizeImage(currentSong.picUrl, 128)} alt="" />
+          <img
+            onClick={(e) => switchFullScreen()}
+            src={getSizeImage(currentSong.picUrl, 128)}
+            alt=""
+          />
           <div className="song-info">
             <div className="name" title={currentSong.name}>
               {currentSong.name}

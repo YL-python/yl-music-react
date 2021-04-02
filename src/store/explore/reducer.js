@@ -1,4 +1,3 @@
-// import { Map } from 'immutable';
 import produce from 'immer';
 // 引入常量
 import * as actionTypes from './constants';

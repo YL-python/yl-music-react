@@ -15,7 +15,7 @@ import {
 export default memo(function PlayerAndLyric() {
   const audioRef = useRef();
 
-  const { currentSong, playMode, fullScreen, isChange } = useSelector(
+  const { currentSong, playMode, fullScreen, isChange, progress, volume } = useSelector(
     (state) => state.player,
     shallowEqual
   );
@@ -24,7 +24,8 @@ export default memo(function PlayerAndLyric() {
   // 初始化  获取 url播放歌曲
   useEffect(() => {
     audioRef.current.src = getSongUrl(currentSong.id);
-    audioRef.current.volume = 0.5;
+    // audioRef.current.currentTime = progress;
+    audioRef.current.volume = volume / 100;
     dispatch(changeProgerssAction(0));
     audioRef.current
       .play()
